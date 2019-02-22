@@ -3,7 +3,8 @@ import ics
 import datetime
 import arrow
 
-sem_start = datetime.datetime(2019, 2, 18)
+user_response = input("Enter the date where the semester begin in this format (dd/mm/yyyy):")
+sem_start = datetime.datetime(int(user_response.split("/")[2]), int(user_response.split("/")[1]), int(user_response.split("/")[0]))
 
 # Converting text based day indicator to digit indicator.
 def text2day(text):
