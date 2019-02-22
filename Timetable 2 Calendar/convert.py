@@ -3,7 +3,7 @@ import ics
 import datetime
 import arrow
 
-user_response = input("Enter the date where the semester begin in this format (dd/mm/yyyy):")
+user_response = input("Enter the date where the semester begin in this format (dd/mm/yyyy):\n")
 sem_start = datetime.datetime(int(user_response.split("/")[2]), int(user_response.split("/")[1]), int(user_response.split("/")[0]))
 
 # Converting text based day indicator to digit indicator.
@@ -187,3 +187,5 @@ for course in schedule:
 # Export to ICS!!!!!!!!
 with open('UNSW_Calendar.ics', 'w') as f:
     f.writelines(new_calendar)
+
+print("\033[92mSuccessfully generated .ics file.\033[0m")
