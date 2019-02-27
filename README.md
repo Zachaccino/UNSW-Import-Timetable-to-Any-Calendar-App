@@ -24,7 +24,7 @@ Import your personal timetable from UNSW website to any timetable app of your ch
 
 <h3>You can convert your timetable and import it to Microsoft Outlook Calendar, Google Calendar, Apple Calendar etc.</h3>
 <h4>Apple Calendar App</h4>
-<img src="/Demo/demo_apple Calendar.jpg" width=450>
+<img src="/Demo/demo_apple Calendar.jpg" width=700>
 
 <h4>Microsoft Outlook Calendar App on Android</h4>
-<img src="/Demo/mobile_cal.jpg" width=450>
+<img src="/Demo/mobile_cal.jpg" width=600>
