@@ -62,8 +62,8 @@ file.close()
 soup = BeautifulSoup(file_content, 'html.parser')
 
 # Step 1
-# Find the HTML Section where entire timetable schedule is located.
-timetable_section = ""
+# Find the HTML section where timetable schedule is located.
+schedule_tables = []
 
 # In a list of tables, for each table...
 for table in soup.find_all("table", {"cellspacing":"0", "width":"100%"}):
@@ -71,23 +71,11 @@ for table in soup.find_all("table", {"cellspacing":"0", "width":"100%"}):
     table_in_text = table.prettify()
 
     # Check if the table contains both section heading and table heading.
-    if table_in_text.find("sectionHeading") != -1 and table_in_text.find("tableHeading") != -1:
-        timetable_section = table
-        break
-
-# Step 2
-# Break the HTML Timetable Section into smaller HTML schedule tables.
-schedule_tables = []
-
-for table in timetable_section.find_all("table"):
-    # Convert the soup to text so string matching is possible.
-    table_in_text = table.prettify()
-
-    # Check if the table is either a section or a table.
     if table_in_text.find("sectionHeading") != -1 or table_in_text.find("tableHeading") != -1:
         schedule_tables.append(table)
 
-# Step 3
+
+# Step 2
 # Organise them into a dictionary
 # The dictionary should have the format
 # {"Course": [{"Activity":"...", "Section":"...", "Day":0-6, "StartH":0-23, "EndH":0-23, "StartM":0-59, "EndM":0-59, "Week":[0,1,2...], "Location":"..."}]}
@@ -165,7 +153,7 @@ for table in schedule_tables:
                                                                 "Week":week,
                                                                 "Location":location})
 
-# Step 4
+# Step 3
 # Convert Schedule to ICS!!!!
 new_calendar = ics.Calendar()
 
@@ -183,7 +171,7 @@ for course in schedule:
                                 end=arrow.get(sem_start + datetime.timedelta(days=(week-1)*7 + item["Day"], hours=item["EndH"], minutes=item["EndM"]), 'Australia/Sydney'))
             new_calendar.events.add(new_event)
 
-# Step 5
+# Step 4
 # Export to ICS!!!!!!!!
 with open('UNSW_Calendar.ics', 'w') as f:
     f.writelines(new_calendar)
